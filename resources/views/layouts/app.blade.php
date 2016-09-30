@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 
     <!-- Scripts -->
     <script>
@@ -96,8 +96,12 @@
     <script src="{{ URL::asset('js/services.js') }}"></script>
 
 
-    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
+ <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
     <script src="{{ URL::asset('js/leaflet-providers.js') }}"></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+
+
+      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
     @yield('scripts')
 </body>
