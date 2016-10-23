@@ -17,9 +17,8 @@
     </title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <link href="css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 
     <!-- Scripts -->
     <script>
@@ -96,12 +95,65 @@
     <script src="{{ URL::asset('js/services.js') }}"></script>
 
 
- <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-    <script src="{{ URL::asset('js/leaflet-providers.js') }}"></script>
+
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+   
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 
 
-      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ 
+  <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+  <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+  <!--script src="../node_modules/leaflet/dist/leaflet-src.js"></script-->
+  <script src="https://npmcdn.com/leaflet.path.drag/src/Path.Drag.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ 
+
+
+
+
+    
+
+    <script src="js/leaflet/src/Toolbar.js"></script>
+    <script src="js/leaflet/src/Tooltip.js"></script>
+
+    <script src="js/leaflet/src/ext/GeometryUtil.js"></script>
+    <script src="js/leaflet/src/ext/LatLngUtil.js"></script>
+    <script src="js/leaflet/src/ext/LineUtil.Intersect.js"></script>
+    <script src="js/leaflet/src/ext/Polygon.Intersect.js"></script>
+    <script src="js/leaflet/src/ext/Polyline.Intersect.js"></script>
+    <script src="js/leaflet/src/ext/TouchEvents.js"></script>
+
+    <script src="js/leaflet/src/draw/DrawToolbar.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Feature.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Circle.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Marker.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="js/leaflet/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+    <script src="js/leaflet/src/edit/EditToolbar.js"></script>
+    <script src="js/leaflet/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="js/leaflet/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="js/leaflet/src/Control.Draw.js"></script>
+
+    <script src="js/leaflet/src/edit/handler/Edit.Poly.js"></script>
+    <script src="js/leaflet/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="js/leaflet/src/edit/handler/Edit.Circle.js"></script>
+    <script src="js/leaflet/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="js/leaflet/src/edit/handler/Edit.Marker.js"></script>
+
+    <script src="js/leaflet/src/Leaflet.draw.js"></script>
+    <link rel="stylesheet" href="js/leaflet/dist/leaflet.draw.css" />
+         <script src="js/leaflet_libs/L.Path.Transform.js"></script>
+    <script src="{{ URL::asset('js/leaflet-providers.js') }}"></script>
+
+    <script src="js/leaflet_libs/Leaflet.Editable.js"></script>
+
+
 
     @yield('scripts')
 </body>
