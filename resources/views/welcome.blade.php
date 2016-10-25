@@ -141,15 +141,33 @@
 
         options: {
             position: 'topleft',
-            callback: map.editTools.startRectangle,
+            callback: newRectange,
             kind: 'rectangle',
             html: '⬛'
         }
 
     });
 
- 
- 
+  var global_polygon;
+  //callback editcontrol
+    function newRectange(){
+
+      drawnItems.clearLayers();
+      if(typeof global_polygon != "undefined"){
+        global_polygon.transform.disable();
+      }
+      global_polygon = map.editTools.startRectangle(null,{
+         // interactive: true, 
+          draggable: true, 
+          transform: true, 
+          color: "red", 
+          weight: 1 
+      });
+      
+
+   
+
+    }
  
     map.addControl(new L.NewRectangleControl({
 
@@ -159,7 +177,7 @@
               allowIntersection : false
             }
           },
-          draw: {
+        draw: {
             polygon : {
               allowIntersection: false,
               showArea:true
@@ -168,31 +186,72 @@
         }
     ));
 
- map.on('editable:drawing:start', function(e) {  
+ map.on('editable:drawing:start', function(e) {
+
       drawnItems.clearLayers();
+
  });
-   map.on('editable:drawing:end', function(e) {  
-      console.log(e);
-      
+  map.on('editable:drawing:move', function(e) {  
       var coordinates = e.layer.getLatLngs()[0];
-      console.log(coordinates);
+     // console.log(coordinates);
+      $("#Xi").val(coordinates[0].lat);
+      $("#Xf").val(coordinates[2].lat);
+      $("#Yi").val(coordinates[1].lng);
+      $("#Yf").val(coordinates[3].lng);
+ });
+
+     function rotate_call(e){  
+      var coordinates = e.layer.getLatLngs()[0];
+     // console.log(coordinates);
+      $("#Xi").val(coordinates[0].lat);
+      $("#Xf").val(coordinates[2].lat);
+      $("#Yi").val(coordinates[1].lng);
+      $("#Yf").val(coordinates[3].lng);
+     }
+
+
+
+ map.on('editable:drawing:end', function(e) {      
+      var coordinates = e.layer.getLatLngs()[0];
+     // console.log(coordinates);
       $("#Xi").val(coordinates[0].lat);
       $("#Xf").val(coordinates[2].lat);
       $("#Yi").val(coordinates[1].lng);
       $("#Yf").val(coordinates[3].lng);
 
-
       var layer = e.layer;
       drawnItems.addLayer(layer);
 
-  
-
+      console.log(global_polygon);
+      //global_polygon.disableEdit();
+      global_polygon.transform.enable();
+      global_polygon.dragging.enable();
+      //global_polygon.on("rotateend", rotate_call);
+      global_polygon.on("transformed", rotate_call);
+     
   });
 
    $("#query").click(function(e) {
      e.preventDefault();
 
-     alert("realizando el query" + JSON.stringify(drawnItems.toGeoJSON()));
+        $.ajax({
+          type: "GET",
+          url: "api/batimetria",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: {json:JSON.stringify(drawnItems.toGeoJSON())},
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            alert(JSON.stringify(data));
+          },
+          failure: function(errMsg) {
+              alert(errMsg);
+          }
+      });
+
+     //alert("realizando el query" + JSON.stringify(drawnItems.toGeoJSON()));
+
      console.log(drawnItems.toGeoJSON());
 
    });
@@ -205,7 +264,7 @@
       $("#Yi").val("");
       $("#Yf").val("");
       drawnItems.clearLayers();
-
+      global_polygon.transform.disable();
    });
 
    $("#Xi, #Xf, #Yi, #Yf").click(function(e) {
@@ -226,6 +285,7 @@
        
        polygon.transform.enable();
        polygon.dragging.enable();
+       console.log(polygon);
        
 
      }

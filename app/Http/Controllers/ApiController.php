@@ -40,7 +40,7 @@ class ApiController extends Controller
     	}else{
     		$success = false;
     		$message = "Faltan parametros";
-    		$results = null;
+    		$results = $request;
     	}
 		return response()->json(["success" => $success, "message" => $message, "results" => $results]);
     }
