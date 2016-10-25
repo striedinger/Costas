@@ -78,7 +78,17 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => 27017,
+            'database' => 'costas',
+            /*'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'options' => [
+                'database' => 'admin' // sets the authentication database required by mongo 3
+            ]*/
+        ],
     ],
 
     /*
