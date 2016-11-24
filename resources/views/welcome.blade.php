@@ -71,12 +71,16 @@
 
         <!-- Button -->
         <div class="form-group row">
-          <div class="col-md-7">
+          <div class="col-md-4">
             <button id="query" name="query" class="btn btn-primary">Ejecutar consulta</button>
           </div>
           
           <div class="col-md-4">
             <button id="clear" name="clear" class="btn ">Limpiar</button>
+          </div>
+
+          <div class="col-md-4">
+            <button id="export" name="clear" class="btn ">Exportat Csv</button>
           </div>
         </div>
       </fieldset>
@@ -280,7 +284,7 @@ function rotate_call(e){
       global_polygon.on("transformed", rotate_call);
      
   });
-  
+  var query_results = {};
    $("#query").click(function(e) {
      e.preventDefault();
 
@@ -292,7 +296,9 @@ function rotate_call(e){
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){
-            console.log(data);
+            //Recivir y gardar globalmente
+            query_results = data;
+            console.log(query_results);
             alert(JSON.stringify(data));
           },
           failure: function(errMsg) {
@@ -321,6 +327,14 @@ function rotate_call(e){
       }
       drawnItems.clearLayers();
       //global_polygon.transform.disable();
+   });
+
+   $("#export").click(function(e) {
+      e.preventDefault();
+      console.log(query_results);
+      alert(JSON.stringify(query_results));
+      //rutina para convertir geojson en csv
+
    });
 
    $("#Xi, #Xf, #Yi, #Yf").click(function(e) {
@@ -367,7 +381,7 @@ function rotate_call(e){
     if($('#controls').hasClass('minimizar')) {
        $('#controls').removeClass('minimizar fa-square-o');
        $('#controls').addClass('fa fa-minus');
-       
+       $("#ocultar_controls").text(' Ocultar');
        $('#controls fieldset').show('fast');
         
     } else {
