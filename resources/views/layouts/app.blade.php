@@ -103,6 +103,8 @@
 
  
   <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
   <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
   <!--script src="../node_modules/leaflet/dist/leaflet-src.js"></script-->
   <script src="https://npmcdn.com/leaflet.path.drag/src/Path.Drag.js"></script>
@@ -113,7 +115,7 @@
 
 
     
-
+<!--
     <script src="js/leaflet/src/Toolbar.js"></script>
     <script src="js/leaflet/src/Tooltip.js"></script>
 
@@ -124,7 +126,7 @@
     <script src="js/leaflet/src/ext/Polyline.Intersect.js"></script>
     <script src="js/leaflet/src/ext/TouchEvents.js"></script>
 
-    <script src="js/leaflet/src/draw/DrawToolbar.js"></script>
+    <<script src="js/leaflet/src/draw/DrawToolbar.js"></script>
     <script src="js/leaflet/src/draw/handler/Draw.Feature.js"></script>
     <script src="js/leaflet/src/draw/handler/Draw.SimpleShape.js"></script>
     <script src="js/leaflet/src/draw/handler/Draw.Polyline.js"></script>
@@ -146,12 +148,20 @@
     <script src="js/leaflet/src/edit/handler/Edit.Rectangle.js"></script>
     <script src="js/leaflet/src/edit/handler/Edit.Marker.js"></script>
 
-    <script src="js/leaflet/src/Leaflet.draw.js"></script>
-    <link rel="stylesheet" href="js/leaflet/dist/leaflet.draw.css" />
-         <script src="js/leaflet_libs/L.Path.Transform.js"></script>
+
+    <script src="js/leaflet/src/Leaflet.draw.js"></script> 
+    <link rel="stylesheet" href="js/leaflet/dist/leaflet.draw.css" />-->
+    
+    <script src="js/leaflet_libs/Leaflet.Editable.js"></script> 
+    <script src="js/leaflet_libs/L.Path.Transform.js"></script>
     <script src="{{ URL::asset('js/leaflet-providers.js') }}"></script>
 
-    <script src="js/leaflet_libs/Leaflet.Editable.js"></script>
+   
+
+    <link rel="stylesheet" href="js/leaflet_libs/leaflet_coordinates/Leaflet.Coordinates-0.1.5.ie.css" />
+    <script src="js/leaflet_libs/leaflet_coordinates/Leaflet.Coordinates-0.1.5.min.js"></script>
+    <script src="js/leaflet_libs/Leaflet.Graticule.js"></script>
+ 
 
 
 

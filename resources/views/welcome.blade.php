@@ -9,70 +9,80 @@
 	
 </div>
 
-<div id="controls">
-          <div class="wrapper">
-            <h2>Herramientas</h2>
-
-
-            <form class="form-horizontal">
-<fieldset>
-
-      <!-- Form Name -->
-      <legend>Seleccionar Región</legend>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Xi">Xi</label>  
-        <div class="col-md-7">
-        <input id="Xi" name="Xi" type="text" placeholder="X inicial" class="form-control input-md">
-          
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Xf">Xf</label>  
-        <div class="col-md-7">
-        <input id="Xf" name="Xf" type="text" placeholder="X final" class="form-control input-md">
-          
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Yf">Yf</label>  
-        <div class="col-md-7">
-        <input id="Yf" name="Yf" type="text" placeholder="Y final" class="form-control input-md">
-          
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Yi">Yi</label>  
-        <div class="col-md-7">
-        <input id="Yi" name="Yi" type="text" placeholder="Y inicial" class="form-control input-md">
-          
-        </div>
-      </div>
-
-      <!-- Button -->
-      <div class="form-group row">
-        
-        <div class="col-md-7">
-          <button id="query" name="query" class="btn btn-primary">Ejecutar consulta</button>
-        </div>
-         
-        <div class="col-md-4">
-          <button id="clear" name="clear" class="btn ">Limpiar</button>
-        </div>
-      </div>
-
-      </fieldset>
-      </form>
-
+<div id="controls" class="fa fa-minus">
+  <a class="minimizar" id="ocultar_controls" href="#"> ocultar</a>
+  <div class="wrapper">
+    <form class="form-horizontal">
+      <fieldset>
+   <!-- <h2 class="text-center">Herramienta Selección de región</h2>-->
+        <!-- Form Name -->
+        <legend>Seleccionar Región</legend>
+        <!-- Latitud-->
+        <div class="row">
+          <h4 class="col-md-offset-1 col-md-3"><p class="fa fa-long-arrow-right"> </p> Latitud</h4>
+          <!-- Text input-->
+          <div class="form-group col-md-4">
+            <label class="col-md-2 control-label" for="Xi">Xi</label>
+            <div class="col-md-10">
+              <input id="Xi" name="Xi" type="text" placeholder="X inicial" class="form-control input-md">
+              
+            </div>
           </div>
-        <div>
+          
+          <!-- Text input-->
+          <div class="form-group col-md-4">
+            <label class="col-md-2 control-label" for="Xf">Xf</label>
+            <div class="col-md-10">
+              <input id="Xf" name="Xf" type="text" placeholder="X final" class="form-control input-md">
+              
+            </div>
+          </div>
+        </div>
+        <!-- Longitud-->
+        <div class="row">
+          <h4 class="col-md-offset-1 col-md-3">  <p class="fa fa-long-arrow-up"></p> Longitud</h4>
+          <!-- Text input-->
+          <div class="form-group col-md-4">
+            <label class="col-md-2 control-label" for="Yi">Yi</label>
+            <div class="col-md-10">
+              <input id="Yi" name="Yi" type="text" placeholder="Y inicial" class="form-control input-md">
+              
+            </div>
+          </div>
+          <!-- Text input-->
+          
+          <div class="form-group col-md-4">
+            <label class="col-md-2 control-label" for="Xf">Yf</label>
+            <div class="col-md-10">
+              <input id="Yf" name="Xf" type="text" placeholder="Y final" class="form-control input-md">
+              
+            </div>
+          </div>
+        </div>
+        <div class=" row">
+          <div class="form-group col-md-12">
+              <label class="col-md-2 control-label" for="angulo">angulo</label>
+              <div class="col-md-10">
+                <input id="angulo" name="angulo" type="text" placeholder="angulo" class="form-control input-md">
+                
+              </div>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group row">
+          <div class="col-md-7">
+            <button id="query" name="query" class="btn btn-primary">Ejecutar consulta</button>
+          </div>
+          
+          <div class="col-md-4">
+            <button id="clear" name="clear" class="btn ">Limpiar</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+<div>
 @endsection
 
 @section('scripts')
@@ -80,25 +90,33 @@
 	 
 </script>
 <script>
-
-
-      d3.json('https://gist.githubusercontent.com/cyrilcherian/92b8f73dcbbb08fd42b4/raw/087202976663f9f3192bec8f0143cf3bc131c794/cities.json', function(error, incidents) 
+d3.json('https://gist.githubusercontent.com/cyrilcherian/92b8f73dcbbb08fd42b4/raw/087202976663f9f3192bec8f0143cf3bc131c794/cities.json', function(error, incidents) 
       {
-
-
         var geoData = incidents;
         var cscale = d3.scale.linear().domain([1, 3]).range(["#ff0000", "#ff6a00", "#ffd800", "#b6ff00", "#00ffff", "#0094ff"]); //"#00FF00","#FFA500"
-       // var map = L.map('map').setView([20.19, 46.60], 3);
-
-  	    var map = L.map('map', {editable: true}).setView([14.997828918781796, -74.81552682962854],6);
-        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+       // var map = L.map('map').setView([20.19, 46.60], 3)
+       //INICIALIZAR MAPA
+  	    var map = L.map('map', {
+                                editable: true,
+                                //transform: true,
+                                minZoom:6,
+                                maxZoom:10,
+                                maxBounds:[[29.305561325527698, -98.87695312500001],[2.4601811810210052, -46.58203125000001]]
+                              })
+                  .setView([14, -70],6);
+        
+        // AÑADIR CAPAS
+        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var osmUrl_grid = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
         osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
+        osm_grid = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
         drawnItems = L.featureGroup().addTo(map);
         L.control.layers(
         {
 
          'osm':osm.addTo(map),
+         'osm grid':osm.addTo(map),
          "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
                     attribution: 'google'
                 })
@@ -106,9 +124,14 @@
         {'drawlayer':drawnItems}, 
         { position: 'topleft', collapsed: false}
         ).addTo(map);
+ 
 
 
-    L.EditControl = L.Control.extend({
+
+     
+//CONTROSL
+
+ L.EditControl = L.Control.extend({
 
         options: {
             position: 'topleft',
@@ -134,9 +157,6 @@
 
     });
 
-
-
-
     L.NewRectangleControl = L.EditControl.extend({
 
         options: {
@@ -148,27 +168,6 @@
 
     });
 
-  var global_polygon;
-  //callback editcontrol
-    function newRectange(){
-
-      drawnItems.clearLayers();
-      if(typeof global_polygon != "undefined"){
-        global_polygon.transform.disable();
-      }
-      global_polygon = map.editTools.startRectangle(null,{
-         // interactive: true, 
-          draggable: true, 
-          transform: true, 
-          color: "red", 
-          weight: 1 
-      });
-      
-
-   
-
-    }
- 
     map.addControl(new L.NewRectangleControl({
 
         edit: {
@@ -180,48 +179,99 @@
         draw: {
             polygon : {
               allowIntersection: false,
-              showArea:true
+              showArea:true, 
+
             }
           }
         }
     ));
 
+
+//Events
  map.on('editable:drawing:start', function(e) {
-
       drawnItems.clearLayers();
-
  });
-  map.on('editable:drawing:move', function(e) {  
-      var coordinates = e.layer.getLatLngs()[0];
+ map.on('editable:drawing:move', function(e) {  
+      //var coordinates = e.layer.getLatLngs()[0];
      // console.log(coordinates);
-      $("#Xi").val(coordinates[0].lat);
-      $("#Xf").val(coordinates[2].lat);
-      $("#Yi").val(coordinates[1].lng);
-      $("#Yf").val(coordinates[3].lng);
+      rotate_call(e);
  });
 
-     function rotate_call(e){  
+var global_polygon;
+  //callback editcontrol
+function newRectange(){
+   for (var k in drawnItems._layers){
+        drawnItems._layers[k].transform.disable();
+        drawnItems._layers[k].dragging.disable();
+          
+      }
+
+  drawnItems.clearLayers();
+  if(typeof global_polygon != "undefined"){
+    global_polygon.transform.disable();
+  }
+  global_polygon = map.editTools.startRectangle(null,{
+     // interactive: true, 
+      draggable: true, 
+      transform: true, 
+      color: "red", 
+      weight: 1 
+  });
+}
+function rotate_call(e){  
       var coordinates = e.layer.getLatLngs()[0];
-     // console.log(coordinates);
+      console.log(coordinates);
+
+      $("#angulo").val(e.rotation);
       $("#Xi").val(coordinates[0].lat);
-      $("#Xf").val(coordinates[2].lat);
       $("#Yi").val(coordinates[1].lng);
+      $("#Xf").val(coordinates[2].lat);
       $("#Yf").val(coordinates[3].lng);
-     }
+}
+ 
+   
+
+ //GRID
+  L.latlngGraticule({
+        showLabel: true,
+        weight:1,
+        opacity: 2,
+        color:"#999",
+        fontColor: "#000",
+        zoomInterval: [
+            {start: 2, end: 3, interval: 30},
+            {start: 4, end: 4, interval: 10},
+            {start: 5, end: 7, interval: 5},
+            {start: 8, end: 10, interval: 1}
+        ]
+    }).addTo(map);
+
+     
 
 
+//coordinates
+    L.control.coordinates({
+      position:"bottomleft", //optional default "bootomright"
+      decimals:2, //optional default 4
+      decimalSeperator:".", //optional default "."
+      labelTemplateLat:"Latitud: {y}", //optional default "Lat: {y}"
+      labelTemplateLng:"Longitud: {x}", //optional default "Lng: {x}"
+      enableUserInput:false, //optional default true
+      useDMS:false, //optional default false
+      useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+      markerType: L.marker, //optional default L.marker
+      markerProps: {}, //optional default {},
+      labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+      labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
+      //customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+    }).addTo(map);
 
  map.on('editable:drawing:end', function(e) {      
-      var coordinates = e.layer.getLatLngs()[0];
+     // var coordinates = e.layer.getLatLngs()[0];
      // console.log(coordinates);
-      $("#Xi").val(coordinates[0].lat);
-      $("#Xf").val(coordinates[2].lat);
-      $("#Yi").val(coordinates[1].lng);
-      $("#Yf").val(coordinates[3].lng);
-
+      rotate_call(e);
       var layer = e.layer;
       drawnItems.addLayer(layer);
-
       console.log(global_polygon);
       //global_polygon.disableEdit();
       global_polygon.transform.enable();
@@ -230,7 +280,7 @@
       global_polygon.on("transformed", rotate_call);
      
   });
-
+  
    $("#query").click(function(e) {
      e.preventDefault();
 
@@ -258,39 +308,78 @@
 
    $("#clear").click(function(e) {
      e.preventDefault();
-
+      $("#angulo").val("");
       $("#Xi").val("");
       $("#Xf").val("");
       $("#Yi").val("");
       $("#Yf").val("");
+     
+    for (var k in drawnItems._layers){
+        drawnItems._layers[k].transform.disable();
+        drawnItems._layers[k].dragging.disable();
+          
+      }
       drawnItems.clearLayers();
-      global_polygon.transform.disable();
+      //global_polygon.transform.disable();
    });
 
    $("#Xi, #Xf, #Yi, #Yf").click(function(e) {
      e.preventDefault();
 
      if($("#Xi").val()!="" && $("#Xf").val()!="" && $("#Yi").val()!="" && $("#Yf").val()!="" ){
+      for (var k in drawnItems._layers){
+        drawnItems._layers[k].transform.disable();
+        drawnItems._layers[k].dragging.disable();
+      }
        drawnItems.clearLayers();
+
+        
        // define rectangle geographical bounds
        var bounds = [[$("#Xi").val(), $("#Yi").val()], [$("#Xf").val(), $("#Yf").val()]];
         // add rectangle passing bounds and some basic styles
        var polygon = L.rectangle(bounds,  
-        { interactive: true, 
+        { interactive: true,
+
           draggable: true, 
           transform: true, 
-          color: "red", 
+          color: "red",
+
           weight: 1}
         ).addTo(drawnItems);
-       
+      
        polygon.transform.enable();
        polygon.dragging.enable();
-       console.log(polygon);
+        
+       polygon.on("transformstart",function(e){
+        rotate_call(e);
+       });
+       polygon.on("transformed",function(e){
+        rotate_call(e);
+       })
+       //console.log(polygon);
        
 
      }
 
    });
+   $("#ocultar_controls").click(function(e) {
+     e.preventDefault();
+    if($('#controls').hasClass('minimizar')) {
+       $('#controls').removeClass('minimizar fa-square-o');
+       $('#controls').addClass('fa fa-minus');
+       
+       $('#controls fieldset').show('fast');
+        
+    } else {
+        $('#controls').removeClass('fa-minus');
+        $('#controls').addClass('minimizar fa fa-square-o');
+        $('#controls fieldset').hide('fast');
+        $("#ocultar_controls").text(' Seleccionar Región');
+    }
+
+   });
+
+   
   
 
 
@@ -389,7 +478,7 @@ function interpolateArr(array, insert) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-var polygon = new L.Polygon(
+/*var polygon = new L.Polygon(
   L.GeoJSON.coordsToLatLngs(
 
     // ~ 13 000 points
@@ -415,7 +504,7 @@ var polygon = new L.Polygon(
     draggable: true,
     transform: true
   }).addTo(map);
-polygon.transform.enable();
+polygon.transform.enable();*/
 
 
     });
